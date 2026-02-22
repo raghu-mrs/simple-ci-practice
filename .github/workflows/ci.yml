@@ -1,10 +1,22 @@
+name: CI-CD Pipeline
+
 on:
   push:
     branches: ["main"]
+
 jobs:
   build:
-     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-     steps:
-        - uses: actions/checkout@v3
-        - run: echo "CI Running Successfully"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create Build File
+        run: |
+          echo "Application Build File" > build.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: build.txt
